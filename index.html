@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💎極限⬆代儲 | Diamond Calculator</title>
+    <title>♪ 極限⬆代儲 | 💎 充值試算</title>
     <style>
         /* --- 基礎設定 --- */
         :root {
@@ -219,24 +219,26 @@
         </div>
 
         <div class="input-group">
-            <label class="input-label">輸入鑽石數量 (顆)</label>
+            <label class="input-label">輸入鑽石數量 </label>
             <input type="number" id="diamondInput" placeholder="請輸入數量" step="1000" oninput="calculate()">
             <div class="hint">
-                <span id="minReqText">最低起算：3,000 顆</span>
+                <span id="minReqText">最低起充：3,000 鑽</span>
                 <span id="rateText">比值：470 TWD / 1k</span>
             </div>
-            <div class="hint error-msg" id="errorMsg">💎低於最低起充門檻</div>
+            <div class="hint error-msg" id="errorMsg">低於起充門檻</div>
+            <div class="hint error-msg" id="unitErrorMsg">數量需為 1000 的倍數</div>
         </div>
 
         <div class="result-area">
-            <div class="result-label">預估台幣總金額</div>
+            <div class="result-label">預估金額</div>
             <div class="price-display">
-                <span id="priceOutput">0</span> <span class="unit">TWD</span>
+                <span id="priceOutput">0</span> <span class="unit" id="twdUnit">TWD</span>
             </div>
         </div>
 
         <div class="footer">
-            *報價僅供參考，實際交易請以當下確認為準
+            *報價僅供參考，實際交易請以當下確認為準 <br> 
+ <br> 版本：2026 / 01 / 12 
         </div>
     </div>
 
@@ -255,6 +257,8 @@
         const minReqText = document.getElementById('minReqText');
         const rateText = document.getElementById('rateText');
         const errorMsg = document.getElementById('errorMsg');
+        const unitErrorMsg = document.getElementById('unitErrorMsg');
+        const twdUnit = document.getElementById('twdUnit');
         const buttons = document.querySelectorAll('.mode-btn');
 
         // 切換模式函數
@@ -265,11 +269,11 @@
             buttons.forEach(btn => btn.classList.remove('active'));
             if (mode === 'promo') {
                 buttons[0].classList.add('active');
-                minReqText.innerText = `最低起算：${promoMin.toLocaleString()} 顆`;
+                minReqText.innerText = `最低起充：${promoMin.toLocaleString()} 鑽`;
                 rateText.innerText = `比值：470 TWD / 1k`;
             } else {
                 buttons[1].classList.add('active');
-                minReqText.innerText = `最低起算：${normalMin.toLocaleString()} 顆`;
+                minReqText.innerText = `最低起充：${normalMin.toLocaleString()} 鑽`;
                 rateText.innerText = `比值：480 TWD / 1k`;
             }
 
@@ -280,12 +284,25 @@
         // 計算函數
         function calculate() {
             const amount = parseFloat(diamondInput.value);
-            
+
             // 如果輸入框是空的
             if (isNaN(amount) || amount <= 0) {
                 priceOutput.innerText = "0";
                 errorMsg.style.display = 'none';
+                unitErrorMsg.style.display = 'none';
+                twdUnit.style.display = '';
                 return;
+            }
+
+            // 限定以 1000 為一個單位（必須是 1000 的倍數）
+            if (amount % 1000 !== 0) {
+                unitErrorMsg.style.display = 'block';
+                errorMsg.style.display = 'none';
+                priceOutput.innerText = "0";
+                twdUnit.style.display = '';
+                return;
+            } else {
+                unitErrorMsg.style.display = 'none';
             }
 
             let price = 0;
@@ -302,10 +319,12 @@
             // 檢查是否符合最低數量
             if (amount < minRequirement) {
                 errorMsg.style.display = 'block';
-                // 雖然不符資格，這裡選擇顯示反灰或維持計算，或者歸零？
-                // 為了體驗，我們先顯示計算結果，但紅字警告依然在
+                priceOutput.innerText = "未達起充門檻";
+                twdUnit.style.display = 'none';
+                return;
             } else {
                 errorMsg.style.display = 'none';
+                twdUnit.style.display = '';
             }
 
             // 格式化金額 (加逗號) 並顯示，取整數
