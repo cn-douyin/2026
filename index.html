@@ -96,7 +96,6 @@
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
         }
 
-        
         /* --- 模式標題強化 (僅影響「優惠時段/原價時段」文字) --- */
         .mode-title {
             display: block;
@@ -115,7 +114,8 @@
         .mode-btn.active .mode-title {
             text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35), 0 10px 25px rgba(212, 175, 55, 0.35);
         }
-/* --- 輸入區塊 --- */
+
+        /* --- 輸入區塊 --- */
         .input-group {
             margin-bottom: 25px;
             text-align: left;
@@ -156,7 +156,7 @@
 
         .error-msg {
             color: var(--danger);
-            display: none; /* 預設隱藏 */
+            display: none;
         }
 
         /* --- 結果顯示區 --- */
@@ -181,6 +181,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin: 10px 0;
+            word-break: break-word;
         }
 
         .unit {
@@ -201,11 +202,12 @@
             .calculator-card {
                 padding: 25px;
             }
+
             .price-display {
                 font-size: 2rem;
             }
         }
-    
+
         /* --- 密碼鎖定畫面 --- */
         #lockScreen {
             position: fixed;
@@ -218,6 +220,7 @@
             background: rgba(15, 17, 21, 0.92);
             backdrop-filter: blur(10px);
         }
+
         .lock-card {
             width: 100%;
             max-width: 420px;
@@ -228,29 +231,37 @@
             overflow: hidden;
             position: relative;
         }
-        .lock-card::before{
-            content:'';
-            position:absolute;
-            top:0;left:0;right:0;height:3px;
+
+        .lock-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
             background: var(--gold-gradient);
         }
-        .lock-body{
+
+        .lock-body {
             padding: 28px 26px 24px;
             text-align: center;
         }
-        .lock-title{
+
+        .lock-title {
             font-size: 1.15rem;
             letter-spacing: 2px;
             font-weight: 700;
             margin: 6px 0 10px;
         }
-        .lock-sub{
+
+        .lock-sub {
             color: var(--text-gray);
             font-size: 0.9rem;
             margin-bottom: 18px;
             font-weight: 300;
         }
-        #passwordInput{
+
+        #passwordInput {
             width: 100%;
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.12);
@@ -264,9 +275,12 @@
             text-align: center;
             letter-spacing: 4px;
         }
-        #passwordInput:focus{ border-color: var(--gold-primary); }
 
-        .unlock-btn{
+        #passwordInput:focus {
+            border-color: var(--gold-primary);
+        }
+
+        .unlock-btn {
             width: 100%;
             margin-top: 14px;
             border: none;
@@ -280,45 +294,44 @@
             box-shadow: 0 6px 18px rgba(212, 175, 55, 0.22);
             transition: transform 0.15s ease;
         }
-        .unlock-btn:active{ transform: translateY(1px); }
 
-        #lockError{
+        .unlock-btn:active {
+            transform: translateY(1px);
+        }
+
+        #lockError {
             margin-top: 10px;
             color: var(--danger);
             display: none;
             font-size: 0.9rem;
         }
-
     </style>
 </head>
 <body>
 
-
-<div id="lockScreen" aria-label="Password Gate">
-    <div class="lock-card">
-        <div class="lock-body">
-            <div class="lock-title">聯繫客服開通權限</div>
-            <div class="lock-sub">請輸入密碼以開啟此頁面</div>
-            <input id="passwordInput" type="password" inputmode="numeric" pattern="[0-9]*" placeholder="輸入密碼" maxlength="12" autocomplete="off">
-            <button class="unlock-btn" id="unlockBtn">解鎖進入</button>
-            <div id="lockError">密碼錯誤，請再試一次</div>
+    <div id="lockScreen" aria-label="Password Gate">
+        <div class="lock-card">
+            <div class="lock-body">
+                <div class="lock-title">聯繫客服開通權限</div>
+                <div class="lock-sub">請輸入密碼以開啟此頁面</div>
+                <input id="passwordInput" type="password" inputmode="numeric" pattern="[0-9]*" placeholder="輸入密碼" maxlength="12" autocomplete="off">
+                <button class="unlock-btn" id="unlockBtn">解鎖進入</button>
+                <div id="lockError">密碼錯誤，請再試一次</div>
+            </div>
         </div>
     </div>
-</div>
-
-
 
     <div class="calculator-card">
         <h1> 💎 陸版抖音♪ | 極限⬆代儲 🚀🚀🚀</h1>
-        <div class="subtitle">  </div>
+        <div class="subtitle"></div>
 
         <div class="mode-switch">
-            <button class="mode-btn active" onclick="setMode('promo')"><span class="mode-title">優惠時段</span> <br>  13:00 ~ 17:00 <br> 20:00 ~ 23:00 </button>
-            <button class="mode-btn" onclick="setMode('normal')"><span class="mode-title">原價時段</span> <br>  17:00 ~ 20:00 <br> 23:00 ~ 13:00 </button>
+            <button class="mode-btn active" onclick="setMode('promo')"><span class="mode-title">優惠時段</span> <br> 13:00 ~ 17:00 <br> 20:00 ~ 23:00 </button>
+            <button class="mode-btn" onclick="setMode('normal')"><span class="mode-title">原價時段</span> <br> 17:00 ~ 20:00 <br> 23:00 ~ 13:00 </button>
         </div>
 
         <div class="input-group">
-            <label class="input-label">輸入鑽石數量 </label>
+            <label class="input-label">輸入鑽石數量</label>
             <input type="number" id="diamondInput" placeholder="請輸入數量" step="1000" oninput="calculate()">
             <div class="hint">
                 <span id="minReqText">最低起充：3,000 鑽</span>
@@ -336,84 +349,81 @@
         </div>
 
         <div class="footer">
-            網頁將隨時保持更新 <br> 所有充值金額皆以網頁試算結果為準 <br> 
- <br> 版本：2026 / 03 / 11
+            網頁將隨時保持更新 <br>
+            所有充值金額皆以網頁試算結果為準 <br>
+            <br>
+            版本：2026 / 03 / 11
         </div>
     </div>
 
     <script>
-
         // --- 密碼鎖定 (開啟前需輸入密碼) ---
         const REQUIRED_PASSWORD = "4931";
-        const lockScreen = document.getElementById('lockScreen');
-        const passwordInput = document.getElementById('passwordInput');
-        const unlockBtn = document.getElementById('unlockBtn');
-        const lockError = document.getElementById('lockError');
+        const lockScreen = document.getElementById("lockScreen");
+        const passwordInput = document.getElementById("passwordInput");
+        const unlockBtn = document.getElementById("unlockBtn");
+        const lockError = document.getElementById("lockError");
 
         function unlockIfCorrect() {
             const entered = (passwordInput.value || "").trim();
             if (entered === REQUIRED_PASSWORD) {
-                lockError.style.display = 'none';
-                lockScreen.style.display = 'none';
-                try { sessionStorage.setItem('unlocked', '1'); } catch (e) {}
+                lockError.style.display = "none";
+                lockScreen.style.display = "none";
+                try { sessionStorage.setItem("unlocked", "1"); } catch (e) {}
                 passwordInput.value = "";
             } else {
-                lockError.style.display = 'block';
+                lockError.style.display = "block";
                 passwordInput.select();
             }
         }
 
-        // 若同一個分頁已解鎖，重新整理不需再輸入
         try {
-            if (sessionStorage.getItem('unlocked') === '1') {
-                lockScreen.style.display = 'none';
+            if (sessionStorage.getItem("unlocked") === "1") {
+                lockScreen.style.display = "none";
             }
         } catch (e) {}
 
-        unlockBtn.addEventListener('click', unlockIfCorrect);
-        passwordInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') unlockIfCorrect();
+        unlockBtn.addEventListener("click", unlockIfCorrect);
+        passwordInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") unlockIfCorrect();
         });
 
-        // 初始聚焦
         setTimeout(() => passwordInput.focus(), 0);
 
-
         // 設定變數
-        let currentMode = 'promo'; // 預設為優惠時段
+        let currentMode = "promo";
         const promoRate = 485 / 1000;
         const promoMin = 3000;
-        
+
         const normalRate = 490 / 1000;
         const normalMin = 10000;
 
         // DOM 元素
-        const diamondInput = document.getElementById('diamondInput');
-        const priceOutput = document.getElementById('priceOutput');
-        const minReqText = document.getElementById('minReqText');
-        const rateText = document.getElementById('rateText');
-        const errorMsg = document.getElementById('errorMsg');
-        const unitErrorMsg = document.getElementById('unitErrorMsg');
-        const twdUnit = document.getElementById('twdUnit');
-        const buttons = document.querySelectorAll('.mode-btn');
+        const diamondInput = document.getElementById("diamondInput");
+        const priceOutput = document.getElementById("priceOutput");
+        const minReqText = document.getElementById("minReqText");
+        const rateText = document.getElementById("rateText");
+        const errorMsg = document.getElementById("errorMsg");
+        const unitErrorMsg = document.getElementById("unitErrorMsg");
+        const twdUnit = document.getElementById("twdUnit");
+        const buttons = document.querySelectorAll(".mode-btn");
 
         // 切換模式函數
         function setMode(mode) {
             currentMode = mode;
-            
-            // 更新按鈕樣式
-            buttons.forEach(btn => btn.classList.remove('active'));
-            if (mode === 'promo') {
-                buttons[0].classList.add('active');
+
+            buttons.forEach(btn => btn.classList.remove("active"));
+
+            if (mode === "promo") {
+                buttons[0].classList.add("active");
                 minReqText.innerText = `最低起充：${promoMin.toLocaleString()} 鑽`;
-                rateText.innerText = `比值：485 TWD / 1k`;
+                rateText.innerText = "比值：485 TWD / 1k";
             } else {
-                buttons[1].classList.add('active');
+                buttons[1].classList.add("active");
                 minReqText.innerText = `最低起充：${normalMin.toLocaleString()} 鑽`;
-                rateText.innerText = `比值：490 TWD / 1k`;
+                rateText.innerText = "比值：490 TWD / 1k";
             }
 
-            // 重新計算
             calculate();
         }
 
@@ -421,30 +431,28 @@
         function calculate() {
             const amount = parseFloat(diamondInput.value);
 
-            // 如果輸入框是空的
             if (isNaN(amount) || amount <= 0) {
                 priceOutput.innerText = "0";
-                errorMsg.style.display = 'none';
-                unitErrorMsg.style.display = 'none';
-                twdUnit.style.display = '';
+                errorMsg.style.display = "none";
+                unitErrorMsg.style.display = "none";
+                twdUnit.style.display = "";
                 return;
             }
 
-            // 限定以 1000 為一個單位（必須是 1000 的倍數）
             if (amount % 1000 !== 0) {
-                unitErrorMsg.style.display = 'block';
-                errorMsg.style.display = 'none';
+                unitErrorMsg.style.display = "block";
+                errorMsg.style.display = "none";
                 priceOutput.innerText = "0";
-                twdUnit.style.display = '';
+                twdUnit.style.display = "";
                 return;
             } else {
-                unitErrorMsg.style.display = 'none';
+                unitErrorMsg.style.display = "none";
             }
 
             let price = 0;
             let minRequirement = 0;
 
-            if (currentMode === 'promo') {
+            if (currentMode === "promo") {
                 minRequirement = promoMin;
                 price = amount * promoRate;
             } else {
@@ -452,20 +460,121 @@
                 price = amount * normalRate;
             }
 
-            // 檢查是否符合最低數量
             if (amount < minRequirement) {
-                errorMsg.style.display = 'block';
+                errorMsg.style.display = "block";
                 priceOutput.innerText = "未達起充門檻";
-                twdUnit.style.display = 'none';
+                twdUnit.style.display = "none";
                 return;
             } else {
-                errorMsg.style.display = 'none';
-                twdUnit.style.display = '';
+                errorMsg.style.display = "none";
+                twdUnit.style.display = "";
             }
 
-            // 格式化金額 (加逗號) 並顯示，取整數
             priceOutput.innerText = Math.floor(price).toLocaleString();
         }
+
+        // ===== 進階前端防護系統 =====
+
+        // 禁止右鍵
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+        });
+
+        // 禁止複製 / 剪下 / 貼上
+        document.addEventListener("copy", function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener("cut", function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener("paste", function (e) {
+            e.preventDefault();
+        });
+
+        // 禁止拖曳 / 選取
+        document.addEventListener("dragstart", function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener("selectstart", function (e) {
+            e.preventDefault();
+        });
+
+        // 禁止常見快捷鍵
+        document.addEventListener("keydown", function (e) {
+            const key = e.key.toLowerCase();
+
+            if (e.key === "F12") {
+                e.preventDefault();
+                return false;
+            }
+
+            if (e.ctrlKey && e.shiftKey && ["i", "j", "c"].includes(key)) {
+                e.preventDefault();
+                return false;
+            }
+
+            if (e.ctrlKey && ["u", "s", "p", "c", "x", "v", "a"].includes(key)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // 建立黑屏遮罩
+        const antiDevtoolsOverlay = document.createElement("div");
+        antiDevtoolsOverlay.id = "antiDevtoolsOverlay";
+        antiDevtoolsOverlay.style.position = "fixed";
+        antiDevtoolsOverlay.style.inset = "0";
+        antiDevtoolsOverlay.style.background = "#000";
+        antiDevtoolsOverlay.style.color = "#fff";
+        antiDevtoolsOverlay.style.zIndex = "999999";
+        antiDevtoolsOverlay.style.display = "none";
+        antiDevtoolsOverlay.style.alignItems = "center";
+        antiDevtoolsOverlay.style.justifyContent = "center";
+        antiDevtoolsOverlay.style.flexDirection = "column";
+        antiDevtoolsOverlay.style.fontSize = "20px";
+        antiDevtoolsOverlay.style.letterSpacing = "2px";
+        antiDevtoolsOverlay.style.textAlign = "center";
+        antiDevtoolsOverlay.style.padding = "20px";
+        antiDevtoolsOverlay.innerHTML = "<div>系統偵測到異常操作</div><div style='font-size:14px;opacity:.7;margin-top:10px;'>請關閉開發者工具後重新整理頁面</div>";
+        document.body.appendChild(antiDevtoolsOverlay);
+
+        // DevTools 偵測
+        (function () {
+            let devtoolsOpen = false;
+
+            function showOverlay() {
+                antiDevtoolsOverlay.style.display = "flex";
+            }
+
+            function hideOverlay() {
+                antiDevtoolsOverlay.style.display = "none";
+            }
+
+            function detectDevtools() {
+                const widthThreshold = window.outerWidth - window.innerWidth > 160;
+                const heightThreshold = window.outerHeight - window.innerHeight > 160;
+
+                const start = performance.now();
+                debugger;
+                const end = performance.now();
+
+                const debuggerDelay = end - start > 100;
+                const opened = widthThreshold || heightThreshold || debuggerDelay;
+
+                if (opened && !devtoolsOpen) {
+                    devtoolsOpen = true;
+                    showOverlay();
+                } else if (!opened && devtoolsOpen) {
+                    devtoolsOpen = false;
+                    hideOverlay();
+                }
+            }
+
+            setInterval(detectDevtools, 1000);
+        })();
     </script>
 </body>
 </html>
